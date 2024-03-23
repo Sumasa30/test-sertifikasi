@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="daftar.css">
+    <title>Daftar Peserta</title>
+</head>
+
+<body>
+    <div class="input">
+        <h1 class="judul">Daftar Peserta</h1>
+    </div>
+    <table id="peserta-table">
+        <thead>
+            <tr>
+                <th class="nama">Name</th>
+                <th class="email">Email</th>
+                <th class="username">Username</th>
+                <th class="no_telepon">No Telepon</th>
+            </tr>
+        </thead>
+        <tbody>
+           
+        </tbody>
+    </table>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            const tableBody = document.querySelector('#peserta-table tbody');
+
+            try {
+                const response = await fetch('http://localhost:3000/api/users');
+                const data = await response.json();
+
+                data.forEach(user => {
+                    const row = `
+                        <tr>
+                            <td>${user.name}</td>
+                            <td>${user.email}</td>
+                            <td>${user.username}</td>
+                            <td>${user.phone}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan. Silakan coba lagi.');
+            }
+        });
+    </script>
+</body>
+
+</html>
