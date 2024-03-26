@@ -10,17 +10,17 @@
 
 <body>
   <div class="input">
-    <h1>Form Registrasi</h1>
+    <h1>Form Edit</h1>
   </div>
 
-  <form class="form">
-    <div class="contrainer">
+  <form class="form" id="editForm">
+    <div class="container">
       <div class="section">
         <input class="input" type="text" name="name" id="name" placeholder="Your name" required />
-        <label class="label" html="name">Name</label>
+        <label class="label" for="name">Name</label>
         <div class="error"></div>
       </div>
-      
+
       <div class="section">
         <input class="input" type="email" name="email" id="email" placeholder="Email" required />
         <label class="label" for="email">Email</label>
@@ -28,42 +28,37 @@
       </div>
 
       <div class="section">
-        <input class="input" type="text" name="Username" id="Username" placeholder="Your Username" required />
-        <label class="label" html="Password">Username</label>
+        <input class="input" type="text" name="username" id="username" placeholder="Your Username" required />
+        <label class="label" for="username">Username</label>
         <div class="error"></div>
       </div>
     </div>
 
     <div class="section">
-      <input class="input" type="text" name="Password" id="Password" placeholder="Password" required />
-      <label class="label" html="Username">Password</label>
+      <input class="input" type="password" name="password" id="password" placeholder="Password" required />
+      <label class="label" for="password">Password</label>
       <div class="error"></div>
     </div>
 
     <div class="section">
-      <input class="input" type="text" name="No Telepon" id="phone" placeholder="No Telepon" required />
-      <label class="label" html="email">No Telepon</label>
+      <input class="input" type="text" name="phone" id="phone" placeholder="No Telepon" required />
+      <label class="label" for="phone">No Telepon</label>
       <div class="error"></div>
     </div> 
 
     <div class="section">
       <label class="label" for="gender"></label>
       <select class="input" name="gender" id="gender" required>
-        <option value="" disabled selected>jenis kelamin</option>
-        <option class="kelamin" value="male">Male</option>
-        <option class="kelamin" value="female">Famale</option>
+        <option value="male">Laki-laki</option>
+        <option value="female">Perempuan</option>
       </select>
       <div class="error"></div>
     </div>
-  </div>
-
-  
 
     <input class="input" type="submit" value="Sign up">
   </form>
 
-  <script src="script.js"></script>
-  
+  <script src="scriptEdit.js"></script>
 
 </body>
 

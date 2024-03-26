@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,18 +15,19 @@
     <table id="peserta-table">
         <thead>
             <tr>
+                <th class="id">ID</th>
                 <th class="nama">Name</th>
                 <th class="email">Email</th>
                 <th class="username">Username</th>
                 <th class="no_telepon">No Telepon</th>
                 <th class="gender">Gender</th>
-                <th class="diskon">Diskon</th> 
-                <th class="action">Action</th> 
+                <th class="diskon">Diskon</th>
+                <th class="action">Action</th>
 
             </tr>
         </thead>
         <tbody>
-           
+
         </tbody>
     </table>
 
@@ -45,6 +45,7 @@
                     data.forEach(user => {
                         const row = `
                             <tr>
+                                <td>${user._id}</td>
                                 <td>${user.name}</td>
                                 <td>${user.email}</td>
                                 <td>${user.username}</td>
@@ -59,7 +60,7 @@
                             </tr>
                         `;
                         tableBody.innerHTML += row;
-                        
+
                         // Tambahkan diskon berdasarkan jenis kelamin
                         const discountCell = tableBody.querySelector(`tr:last-child .discount-cell`);
                         if (user.gender === 'male') {
@@ -80,11 +81,11 @@
                                 const deleteResponse = await fetch(`http://localhost:3000/api/users/${userId}`, {
                                     method: 'DELETE'
                                 });
-                                
+
                                 if (!deleteResponse.ok) {
                                     throw new Error('Terjadi kesalahan saat menghapus data.');
                                 }
-                                
+
                                 button.closest('tr').remove(); // Hapus baris dari tabel setelah berhasil dihapus
                             } catch (error) {
                                 console.error('Error:', error);
@@ -96,31 +97,9 @@
                     // Tambahkan event listener untuk setiap tombol Edit
                     const editButtons = document.querySelectorAll('.edit-btn');
                     editButtons.forEach(button => {
-                        button.addEventListener('click', async function () {
+                        button.addEventListener('click', function () {
                             const userId = button.getAttribute('data-id');
-                            const newName = prompt('Masukkan nama baru:');
-                            if (newName !== null) {
-                                try {
-                                    const editResponse = await fetch(`http://localhost:3000/api/users/${userId}`, {
-                                        method: 'PUT',
-                                        headers: {
-                                            'Content-Type': 'application/json',
-                                        },
-                                        body: JSON.stringify({ name: newName })
-                                    });
-                                    
-                                    if (!editResponse.ok) {
-                                        throw new Error('Terjadi kesalahan saat mengedit data.');
-                                    }
-
-                                    // Update tampilan setelah berhasil mengedit
-                                    button.closest('tr').querySelector('.nama').textContent = newName;
-                                    alert('Data berhasil diubah!');
-                                } catch (error) {
-                                    console.error('Error:', error);
-                                    alert('Terjadi kesalahan. Silakan coba lagi.');
-                                }
-                            }
+                            window.location.href = `edit.html?id=${userId}`;
                         });
                     });
                 };
