@@ -4,6 +4,7 @@ const express = require('express');
 const connectDB = require('./db');
 const User = require('./model/userModel.js');
 const cors = require('cors');
+const { isValidObjectId } = require('mongoose');
 
 const app = express();
 const PORT = 3000;
@@ -85,18 +86,23 @@ app.put('/api/users/:id', async (req, res) => {
 // Endpoint untuk menghapus user berdasarkan ID
 app.delete('/api/users/:id', async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const userId = req.params.id;
+    if (!isValidObjectId(userId)) {
+      return res.status(400).json({ msg: 'ID pengguna tidak valid.' });
+    }
+
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ msg: 'User tidak ditemukan.' });
     }
-    await user.remove();
+
+    await User.deleteOne({ _id: userId });
     res.json({ msg: 'User berhasil dihapus.' });
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Terjadi kesalahan saat menghapus user.');
   }
 });
-
 app.listen(PORT, () => {
   console.log(`Server berjalan pada http://localhost:${PORT}`);
 });

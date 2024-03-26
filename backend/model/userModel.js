@@ -28,6 +28,11 @@ const userSchema = new mongoose.Schema({
     enum: ['male', 'female'], 
     required: true,
   },
+
+  discountInfo: {
+    type: String,
+    required: true,
+  },
 });
 
 const User = mongoose.model('User', userSchema, "users");
