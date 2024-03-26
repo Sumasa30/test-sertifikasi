@@ -46,11 +46,24 @@
       <div class="error"></div>
     </div> 
 
+    <div class="section">
+      <label class="label" for="gender"></label>
+      <select class="input" name="gender" id="gender" required onchange="checkGender()">
+        <option value="" disabled selected>jenis kelamin</option>
+        <option class="kelamin" value="male">Male</option>
+        <option class="kelamin" value="female">Famale</option>
+      </select>
+      <div class="error"></div>
+    </div>
+  </div>
+
+  
 
     <input class="input" type="submit" value="Sign up">
   </form>
 
   <script src="script.js"></script>
+
 
 </body>
 

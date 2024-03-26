@@ -1,3 +1,5 @@
+// app.js atau server.js
+
 const express = require('express');
 const connectDB = require('./db');
 const User = require('./model/userModel.js');
@@ -7,7 +9,6 @@ const app = express();
 const PORT = 3000;
 
 app.use(cors());
-
 app.use(express.json());
 
 // Koneksi ke MongoDB
@@ -22,7 +23,6 @@ app.post('/api/users', async (req, res) => {
     res.json(user);
   } catch (error) {
     console.error(error.message);
-    console.log(req.body);
     res.status(500).send('Terjadi kesalahan saat membuat user.');
   }
 });
@@ -55,18 +55,26 @@ app.get('/api/users/:id', async (req, res) => {
 // Endpoint untuk mengupdate user berdasarkan ID
 app.put('/api/users/:id', async (req, res) => {
   try {
-    const data = req.body;
-    let user = await User.findById(req.params.id);
+    const userId = req.params.id;
+    const { name, email, username, password, phone, gender } = req.body;
+
+    // Cek apakah user dengan ID yang diberikan ada
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ msg: 'User tidak ditemukan.' });
     }
-    user.name = data.name;
-    user.email = data.email;
-    user.username = data.username;
-    user.password = data.password;
-    user.phone = data.phone;
 
+    // Update data user
+    user.name = name;
+    user.email = email;
+    user.username = username;
+    user.password = password;
+    user.phone = phone;
+    user.gender = gender;
+
+    // Simpan perubahan
     await user.save();
+
     res.json(user);
   } catch (error) {
     console.error(error.message);
