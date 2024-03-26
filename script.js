@@ -164,3 +164,5 @@ document.addEventListener('DOMContentLoaded', async function () {
     // // Panggil fetchData untuk pertama kali saat halaman dimuat
     // fetchData();
 });
+
+// komang

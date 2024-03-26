@@ -60,3 +60,5 @@ window.addEventListener('DOMContentLoaded', async function () {
         alert('Terjadi kesalahan. Silakan coba lagi.');
     }
 });
+
+// komang
